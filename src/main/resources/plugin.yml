@@ -1,0 +1,7 @@
+name: ReLeash
+version: '${project.version}'
+main: code.blurone.releash.ReLeash
+api-version: '1.20'
+load: STARTUP
+author: "BlurOne!"
+website: "https://github.com/BlurOne-GIT/Re-Leash"
