@@ -1,0 +1,20 @@
+# Allow players to be leashed by other players. They can be set free by crouching and uncrouching rapidly.
+player-leashing: false
+
+# All mobs from https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html
+# Not all of them will work, only living entities.
+#
+# Default entities: https://minecraft.wiki/w/Lead#Leashing_mobs
+#
+#
+# To add to lists, use the following syntax:
+#
+# list:
+#   - "BAT"
+#   - "VILLAGER"
+
+# Add to the list of default mobs that can be leashed. Leave empty for all, you can later remove some on the blacklist.
+whitelist:
+
+# Remove from the list of default mobs that can be leashed, or from the whitelist autofill.
+blacklist:
