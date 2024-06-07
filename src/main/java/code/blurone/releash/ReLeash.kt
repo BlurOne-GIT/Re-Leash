@@ -46,6 +46,8 @@ class ReLeash : JavaPlugin(), Listener {
         if (!isWhitelist) {
             val (defaultBlacklist, autofillBlacklist) = blacklist.sorted().partition(::isDefaultEntity)
             theList = autofillBlacklist
+            if (defaultBlacklist.isNotEmpty())
+                server.pluginManager.registerEvents(BlacklistedUnleasher(defaultBlacklist), this)
             return
         }
 
@@ -54,6 +56,10 @@ class ReLeash : JavaPlugin(), Listener {
             .filter { !isDefaultEntity(it) }
             .sorted()
 
+        if (blacklist.isNotEmpty())
+            server.pluginManager.registerEvents(BlacklistedUnleasher(
+                blacklist.filter(::isDefaultEntity).sorted()
+            ), this)
     }
 
     @EventHandler
