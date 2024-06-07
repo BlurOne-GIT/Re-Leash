@@ -37,6 +37,8 @@ class ReLeash : JavaPlugin(), Listener {
         // Plugin startup logic
         server.pluginManager.registerEvents(this, this)
 
+        if (playerLeashing)
+            server.pluginManager.registerEvents(PlayerUnleasher(this), this)
 
         val blacklist = config.getStringList("blacklist")
             .mapNotNull { try { EntityType.valueOf(it) } catch (_: Exception) { null } }
