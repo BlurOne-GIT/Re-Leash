@@ -35,6 +35,7 @@ class ReLeash : JavaPlugin(), Listener {
 
     override fun onEnable() {
         // Plugin startup logic
+        saveDefaultConfig()
         server.pluginManager.registerEvents(this, this)
 
         if (playerLeashing)
