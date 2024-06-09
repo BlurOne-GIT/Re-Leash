@@ -9,6 +9,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.plugin.java.JavaPlugin
+import org.bukkit.scheduler.BukkitRunnable
 
 @Suppress("unused")
 class ReLeash : JavaPlugin(), Listener {
@@ -78,7 +79,11 @@ class ReLeash : JavaPlugin(), Listener {
             (livingEntity.type != EntityType.PLAYER && binaryHasEntity(theList, livingEntity.type) != isWhitelist)
         ) return
 
-        if (!livingEntity.setLeashHolder(event.player)) return
+        object : BukkitRunnable() {
+            override fun run() {
+                livingEntity.setLeashHolder(event.player)
+            }
+        }.runTaskLater(this, 0L)
 
         if (event.hand == EquipmentSlot.HAND)
             event.player.swingMainHand()
