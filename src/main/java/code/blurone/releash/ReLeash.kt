@@ -2,8 +2,7 @@ package code.blurone.releash
 
 import org.bukkit.GameMode
 import org.bukkit.Material
-import org.bukkit.entity.EntityType
-import org.bukkit.entity.LivingEntity
+import org.bukkit.entity.*
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEntityEvent
@@ -32,15 +31,11 @@ class ReLeash : JavaPlugin(), Listener {
 
     private lateinit var theList: List<EntityType>
     private val isWhitelist = config.getStringList("whitelist").isNotEmpty()
-    private val playerLeashing = config.getBoolean("player-leashing", false)
 
     override fun onEnable() {
         // Plugin startup logic
         saveDefaultConfig()
         server.pluginManager.registerEvents(this, this)
-
-        if (playerLeashing)
-            server.pluginManager.registerEvents(PlayerUnleasher(this), this)
 
         val blacklist = config.getStringList("blacklist")
             .mapNotNull { try { EntityType.valueOf(it) } catch (_: Exception) { null } }
@@ -75,10 +70,10 @@ class ReLeash : JavaPlugin(), Listener {
         if (
             livingEntity.isLeashed ||
             isDefaultEntity(livingEntity.type) ||
-            (livingEntity.type == EntityType.PLAYER && !playerLeashing) ||
-            (livingEntity.type != EntityType.PLAYER && binaryHasEntity(theList, livingEntity.type) != isWhitelist)
+            livingEntity.type == EntityType.PLAYER ||
+            binaryHasEntity(theList, livingEntity.type) != isWhitelist
         ) return
-
+        
         object : BukkitRunnable() {
             override fun run() {
                 livingEntity.setLeashHolder(event.player)
