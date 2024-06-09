@@ -73,7 +73,7 @@ class ReLeash : JavaPlugin(), Listener {
             livingEntity.type == EntityType.PLAYER ||
             binaryHasEntity(theList, livingEntity.type) != isWhitelist
         ) return
-        
+
         object : BukkitRunnable() {
             override fun run() {
                 livingEntity.setLeashHolder(event.player)
