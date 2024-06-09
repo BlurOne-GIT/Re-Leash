@@ -25,7 +25,7 @@ class ReLeash : JavaPlugin(), Listener {
             EntityType.TRADER_LLAMA,   EntityType.WOLF,           EntityType.ZOGLIN,       EntityType.ZOMBIE_HORSE
         ).sorted()
 
-        fun binaryHasEntity(list: List<EntityType>, type: EntityType) = list.binarySearch(type) != -list.size
+        fun binaryHasEntity(list: List<EntityType>, type: EntityType) = list.binarySearch(type) >= 0
         fun isDefaultEntity(type: EntityType): Boolean = binaryHasEntity(defaultEntities, type)
     }
 
